@@ -28,7 +28,7 @@ def getclientlist(host):
         url="http://"+str(host)+"/client/list"
     else: url=str(host)+"/client/list"
     r=requests.post(url,data,timeout=3)
-    if r.status_code is 200:
+    if r.status_code is 200 and ".js" not in r.text:
         log(f,host)
         print("[success]"+url)
         print(r.text)
