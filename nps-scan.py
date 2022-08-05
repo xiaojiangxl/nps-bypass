@@ -1,3 +1,4 @@
+
 import time
 import hashlib
 import requests
@@ -26,8 +27,15 @@ def getclientlist(host):
     if "http" not in host:
         url="http://"+str(host)+"/client/list"
     else: url=str(host)+"/client/list"
-    r=requests.post(url,data)
+    r=requests.post(url,data,timeout=3)
     if r.status_code is 200:
         log(f,host)
         print("[success]"+url)
         print(r.text)
+
+if __name__ =="__main__":
+    file=open("url.txt","r")
+    for host in file.readlines():
+        try:
+            getclientlist(host)
+        except:pass
